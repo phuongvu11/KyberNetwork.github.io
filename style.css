@@ -187,7 +187,7 @@ background-size: cover; }
   border-bottom: 1px solid #b7b7b7;
   padding:2rem 0;
 }
-.partner img { filter: grayscale(1); max-height: 80px}
+.partner img { filter: grayscale(1); max-width: 200px; max-height: 80px; margin-top: 40px; }
 .partner div div:hover img { filter: grayscale(0); }
 .seemore { margin: 40px auto 50px; }
 
