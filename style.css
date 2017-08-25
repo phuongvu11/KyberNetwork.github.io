@@ -300,7 +300,6 @@ background-size: cover; }
 	.step img { margin:15px 0; }
 	.step1 { left:calc(0% - 65px); }
 	.step5 { right:calc(0% - 65px); }
-	#news { display: none; }
 }
 
 @media screen and (max-width: 640px) {
