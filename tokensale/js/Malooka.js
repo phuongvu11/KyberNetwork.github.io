@@ -31,35 +31,6 @@ jQuery(document).ready(function () {
 
 
     /* ==========================================================================
-    Animating Member Social Icons
-    ========================================================================== */
-    $('.member-box').mouseenter(function () {
-        var delay = 0;
-        $(this).find('.member-overlayer ul li').each(function () {
-            $(this).delay(delay).animate({
-                opacity: 1
-            }, 10);
-            delay += 150;
-        });
-    });
-    $('.member-box').mouseleave(function () {
-        var delay = 0;
-        $(this).find('.member-overlayer ul li').each(function () {
-            $(this).delay(delay).animate({
-                opacity: 0
-            }, 10);
-            delay += 10;
-        });
-    });
-
-
-    /* ==========================================================================
-    Placeholder
-    ========================================================================== */
-    $('input, textarea').placeholder();
-
-
-    /* ==========================================================================
     Home Section Height
     ========================================================================== */
     WindowsHeight = $(window).height();
@@ -88,67 +59,6 @@ jQuery(document).ready(function () {
 
 
     /* ==========================================================================
-    FORM Validation
-    ========================================================================== */
-    $('form#form').submit(function () {
-        $('form#form .error').remove();
-        $('form#form .success').remove();
-        var hasError = false;
-        $('.requiredField').each(function () {
-            if (jQuery.trim($(this).val()) === '') {
-                $(this).parent().append('<span class="error"><i class="fa fa-exclamation-triangle"></i></span>');
-                hasError = true;
-            } else if ($(this).hasClass('email')) {
-                var emailReg = /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/;
-                if (!emailReg.test(jQuery.trim($(this).val()))) {
-                    $(this).parent().append('<span class="error"><i class="fa fa-exclamation-triangle"></i></span>');
-                    hasError = true;
-                }
-            }
-        });
-        if (!hasError) {
-            formInput = $(this).serialize();
-            $.post($(this).attr('action'), formInput, function (data) {
-                $('form#form').append('<div class="success"><div class="col-md-12"><div class="alert alert-nesto"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button><p>Thanks! Your email was successfully sent. We will contact you asap.</p></div></div></div>');
-            });
-            $('.requiredField').val('');
-        }
-        return false;
-    });
-    $('form#form input').focus(function () {
-        $('form#form .error').remove();
-        $('form#form .success').remove();
-    });
-    $('form#form textarea').focus(function () {
-        $('form#form .error').remove();
-        $('form#form .success').remove();
-    });
-
-
-    /* ==========================================================================
-    Twitter Feed
-    ========================================================================== */
-    $('.tweetfeed .tweet').twittie({
-        dateFormat: '%b. %d, %Y',
-        template: '<a href="http://twitter.com/NestoLab" title="Twitter"><i class="fa fa-twitter"></i></a> {{tweet}}',
-        count: 2,
-        hideReplies: true
-    });
-
-
-    /* ==========================================================================
-    Flickr Feed
-    ========================================================================== */
-    $('#flickr-feed').jflickrfeed({
-        limit: 12,
-        qstrings: {
-            id: '25461271@N07'
-        },
-        itemTemplate: '<li>' + '<a href="{{image_b}}" class="fancybox" data-fancybox-group="gall1" title="{{title}}"><img src="{{image_s}}" alt="{{title}}" /></a>' + '</li>'
-    });
-
-
-    /* ==========================================================================
     Fancy Box
     ========================================================================== */
     $(".fancybox").fancybox({
@@ -162,65 +72,6 @@ jQuery(document).ready(function () {
             }
         }
     });
-
-
-    /* ==========================================================================
-    Subscribe
-    ========================================================================== */
-    $('form#sform').submit(function () {
-        $('form#sform .serror').remove();
-        $('form#sform .ssuccess').remove();
-        var shasError = false;
-        $('.srequiredField').each(function () {
-            if (jQuery.trim($(this).val()) === '') {
-                $(this).parent().append('<span class="serror"><i class="fa fa-exclamation-triangle"></i></span>');
-                shasError = true;
-            } else if ($(this).hasClass('email')) {
-                var emailReg = /^([\w-\.]+@([\w]+\.)+[\w]{2,4})?$/;
-                if (!emailReg.test(jQuery.trim($(this).val()))) {
-                    $(this).parent().append('<span class="serror"><i class="fa fa-exclamation-triangle"></i></span>');
-                    shasError = true;
-                }
-            }
-        });
-        if (!shasError) {
-            sformInput = $(this).serialize();
-            $.post($(this).attr('action'), sformInput, function (data) {
-                $('form#sform').append('<span class="ssuccess"><i class="fa fa-check"></i></span>');
-            });
-            $('.srequiredField').val('');
-        }
-        return false;
-    });
-    $('form#sform input').focus(function () {
-        $('form#sform .serror').remove();
-        $('form#sform .ssuccess').remove();
-    });
-
-
-    /* ==========================================================================
-    ToolTip
-    ========================================================================== */
-    $("a[data-rel=tooltip]").tooltip({container: 'body'});
-
-
-    /* ==========================================================================
-    on mobile?
-    ========================================================================== */
-	onMobile = false;
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test(navigator.userAgent)) { onMobile = true; }
-
-	if (onMobile === true) {
-        $("a[data-rel=tooltip]").tooltip('destroy');
-        jQuery('#team-section').css("background-attachment", "scroll");
-    }
-
-
-    /* ==========================================================================
-    Parallax
-    ========================================================================== */
-    jQuery('#team-section').parallax("50%", -0.5);
-
 
     /* ==========================================================================
     Flat Surface Shader
@@ -305,40 +156,5 @@ jQuery(window).load(function () {
         loadingLoader.fadeOut();
     }
     hideLoader();
-
-    /* ==========================================================================
-    Funny Text
-    ========================================================================== */
-    $('#welcome-msg').funnyText({
-        speed: 500,
-        fontSize: '2em',
-        color: '#ffffff',
-        activeColor: '#3ECB7F',
-        borderColor: 'none'
-    });
-
-    $('#services-section-title').funnyText({
-        speed: 500,
-        fontSize: '1.5em',
-        color: '#2c3e50',
-        activeColor: '3ECB7F',
-        borderColor: 'none'
-    });
-
-    $('#team-section-title').funnyText({
-        speed: 500,
-        fontSize: '1.5em',
-        color: '#ffffff',
-        activeColor: '#2c3e50',
-        borderColor: 'none'
-    });
-
-    $('#contact-section-title').funnyText({
-        speed: 500,
-        fontSize: '1.5em',
-        color: '#2c3e50',
-        activeColor: '#f1c40f',
-        borderColor: 'none'
-    });
 
 });
