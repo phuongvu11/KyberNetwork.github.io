@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Kyber Address Check</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="/img/favicon.png" rel="shortcut icon" type="image/png">
+    <link href="https://fonts.googleapis.com/css?family=Lato|Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+  <div class="container">
+  <div class="row">
+        <div class="col-md-6 col-xs-12 mx-auto mt-30 mb-30">
+          <img src="vertical-logo.png"  id="logo" alt="" class="mx-auto d-block">
+
+        </div>
+  </div>
+  <div class="row">
+      <div class="col-md-8 col-xs-12 mx-auto text-center">
+      <p class="lead mb-30">Check if your ethereum address is registered</p>
+      <div class="input-group">
+        <input type="text" id="user_address" class="form-control" placeholder="Your address" aria-describedby="user-address">
+        <span class="input-group-addon" onclick="checkAddress()">Check</span>
+      </div>
+      <!--
+       <div class="search">
+          <input type="text" id="user_address" class="searchTerm" placeholder="Your address">
+          <button type="submit" class="searchButton"  onclick="checkAddress()">
+            Check
+         </button>
+      </div> -->
+      <ul class="fa-ul text-left mt-3">
+       <li id="error"><i class="fa-li fa fa-exclamation-triangle"></i>Invalid address. Address should start with 0x, followed by exactly 40 hex digits</li>
+     </ul>
+    </div>
+
+ </div>
+
+ <div class="row">
+    <div class="col-md-8 col-xs-12 mx-auto text-center mt-5">
+      <div id="result-yes">
+        <i class="fa fa-2x fa-check-square-o mb-20" id="check-mark" aria-hidden="true"></i>
+        <p class="lead mb-30">Your address is registered</p>
+      </div>
+
+      <div id="result-no" style=“display:none”>
+        <p class="lead mb-30">Your address is NOT registered. Please check again later.</p>
+      </div>
+    </div>
+ </div>
+ </div>
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="web3.min.js"></script>
+    <script src="bignumber.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
