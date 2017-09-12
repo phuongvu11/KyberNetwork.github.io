@@ -12,7 +12,7 @@ var whitelistABI = [{"constant":true,"inputs":[],"name":"cappedSaleStartTime","o
 var whitelist;
 
 window.addEventListener('load', function() {
-      var web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io"));
+      var web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/0BRKxQ0SFvAxGL72cbXi"));
       whitelist = web3.eth.contract(whitelistABI).at(whitelistAddress);
 
       document.getElementById("result-no").style.display = "none";
@@ -27,15 +27,23 @@ var checkAddress = function(){
     var re = /^0x[0-9a-fA-F]{40}$/g;
     if( re.test(string) ){
       document.getElementById("error").style.display = "none";
-      whitelist.contributorCap(string, function(err,result){
-        if( (new BigNumber(result)).greaterThan(0) ) {
-          document.getElementById("cap").textContent = "Your cap is " + result.dividedBy(1000000000000000000).toString() + " ETH";
-          document.getElementById("result-no").style.display = "none";
-          document.getElementById("result-yes").style.display = "block";
-        }
-        else {
+      whitelist.contributorCap(string, function(err, result){
+        console.log(err);
+        console.log(result);
+        if (err) {
+          document.getElementById("cap").textContent = err;
           document.getElementById("result-no").style.display = "block";
           document.getElementById("result-yes").style.display = "none";
+        } else {
+          if( (new BigNumber(result)).greaterThan(0) ) {
+            document.getElementById("cap").textContent = "Your cap is " + result.dividedBy(1000000000000000000).toString() + " ETH";
+            document.getElementById("result-no").style.display = "none";
+            document.getElementById("result-yes").style.display = "block";
+          }
+          else {
+            document.getElementById("result-no").style.display = "block";
+            document.getElementById("result-yes").style.display = "none";
+          }
         }
       });
     }
