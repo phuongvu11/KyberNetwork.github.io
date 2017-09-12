@@ -31,7 +31,7 @@ var checkAddress = function(){
         console.log(err);
         console.log(result);
         if (err) {
-          document.getElementById("cap").textContent = err;
+          document.getElementById("cap").textContent = "Got error: " + err + ". Please try later";
           document.getElementById("result-no").style.display = "block";
           document.getElementById("result-yes").style.display = "none";
         } else {
