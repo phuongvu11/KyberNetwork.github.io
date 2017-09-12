@@ -10,9 +10,10 @@ var whitelistABI = [{"constant":true,"inputs":[],"name":"cappedSaleStartTime","o
 
 
 var whitelist;
+var web3;
 
 window.addEventListener('load', function() {
-      var web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/0BRKxQ0SFvAxGL72cbXi"));
+      web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/0BRKxQ0SFvAxGL72cbXi"));
       whitelist = web3.eth.contract(whitelistABI).at(whitelistAddress);
 
       document.getElementById("result-no").style.display = "none";
@@ -28,15 +29,14 @@ var checkAddress = function(){
     if( re.test(string) ){
       document.getElementById("error").style.display = "none";
       whitelist.contributorCap(string, function(err, result){
-        console.log(err);
-        console.log(result);
         if (err) {
           document.getElementById("cap").textContent = "Got error: " + err + ". Please try later";
           document.getElementById("result-no").style.display = "block";
           document.getElementById("result-yes").style.display = "none";
         } else {
-          if( (new BigNumber(result)).greaterThan(0) ) {
-            document.getElementById("cap").textContent = "Your cap is " + result.dividedBy(1000000000000000000).toString() + " ETH";
+          var registered = result.greaterThan(0);
+          if(registered) {
+            document.getElementById("cap").textContent = "Your cap is " + web3.fromWei(result, "ether") + " ETH";
             document.getElementById("result-no").style.display = "none";
             document.getElementById("result-yes").style.display = "block";
           }
