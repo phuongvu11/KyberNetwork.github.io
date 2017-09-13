@@ -43,16 +43,13 @@
           <div class="row">
             <!-- welcome-msg -->
             <h1 id="welcome-msg">Kyber Network</h1>
-            <h2 style="padding-top:16px;">Token Sale</h2>
+            <h2 style="padding-top:16px;" id="token-sale-title">Token Sale</h2>
 
-            <h3 class="launch-hour" style="padding-top:12px;">
+            <h3 class="launch-hour" style="padding-top:12px;" id="day-status">
               6:00 AM UTC - 15 September 2017
             </h3>
             <!-- countdown_dashboard -->
             <div id="countdown_dashboard">
-              <h3 class="launch-hour" style="padding-bottom: 10px;">
-                starts in
-              </h3>
               <!-- Days -->
               <div class="col-md-3 col-sm-3 col-xs-3">
                 <div class="days_dash">
@@ -94,7 +91,42 @@
               <!-- /Seconds -->
 
             </div>
-            <a href="https://tokensale.kyber.network/check/" class="btn  btn-xlarge btn-warning" role="button" style="margin-top:80px;">Registration is over, check your cap here</a>
+            <div class="row">
+              <div class="col-xs-1 col-md-2">
+              </div>
+              <div class="col-xs-10 col-md-8">
+                <div class="progress">
+                  <div id="presale-progress" class="progress-bar progress-bar-info" role="progressbar" style="width:0%">
+                    Presale
+                  </div>
+                  <div id="raised-progress" class="progress-bar progress-bar-success" role="progressbar" style="width:0%">
+                    KNC raised
+                  </div>
+                  <div id="left-progress" class="progress-bar progress-bar-warning" role="progressbar" style="width:100%">
+                    KNC left
+                  </div>
+                </div>
+              </div>
+              <div class="col-xs-1 col-md-2">
+              </div>
+            </div>
+            <div class="row eth-info">
+              <div id="raised-eth" class="col-xs-6 text-right eth-number">
+                100 ETH
+              </div>
+              <div class="col-xs-6 text-left eth-label">
+                raised
+              </div>
+            </div>
+            <div class="row eth-info">
+              <div id="eth-left" class="col-xs-6 text-right eth-number">
+                100 ETH
+              </div>
+              <div class="col-xs-6 text-left eth-label">
+                to go
+              </div>
+            </div>
+            <a href="https://tokensale.kyber.network/check/" class="btn  btn-xlarge btn-warning action-button" role="button" style="margin-top:40px;">Registration is over, check your cap here</a>
           </div>
         </div>
       </div>
@@ -298,7 +330,7 @@
     <div class="container">
       <div class="row">
         <div class="col-12 text-center">
-          <a href="https://tokensale.kyber.network/check/" class="btn  btn-xlarge btn-warning" role="button">Registration is over, check your cap here</a>
+          <a href="https://tokensale.kyber.network/check/" class="btn  btn-xlarge btn-warning action-button" role="button">Registration is over, check your cap here</a>
         </div>
       </div>
     </div>
@@ -314,7 +346,6 @@
   <script type="text/javascript" src="js/Malooka.js"></script>
   <script src="js/web3.min.js"></script>
   <script src="js/bignumber.js"></script>
-  <script src="js/script.js"></script>
   <!--[if lt IE 9]>
     <script src="js/plugins/html5shiv.js"></script>
     <script src="js/plugins/selectivizr.js"></script>
