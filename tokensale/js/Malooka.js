@@ -44,19 +44,47 @@ jQuery(document).ready(function () {
     /* ==========================================================================
     CountDown Timer
     ========================================================================== */
-    $('#countdown_dashboard').countDown({
-        targetDate: {
-            'day': 15,
-            'month': 9,
-            'year': 2017,
-            'hour':  6,
-            'min': 0,
-            'sec': 0,
-            'new_utc':0,
-        },
-        omitWeeks: true
-    });
-
+    var cappedSaleStartTime = 1505455200;
+    var openSaleStartTime = 1505541600;
+    var openSaleEndTime = 1505628000;
+    var currentTime = Math.floor((new Date()).getTime() / 1000.0);
+    console.log(currentTime);
+    var countDownTime;
+    var icoEnded = false;
+    if (currentTime < cappedSaleStartTime) {
+      // before ICO
+      countDownTime = new Date(cappedSaleStartTime * 1000);
+    } else if (currentTime < openSaleStartTime) {
+      // capped sale is openning
+      countDownTime = new Date(openSaleStartTime * 1000);
+    } else if (currentTime < openSaleEndTime) {
+      // open sale is openning
+      countDownTime = new Date(openSaleStartTime * 1000);
+    } else {
+      // ICO is closed
+      icoEnded = true;
+    }
+    console.log(countDownTime.getUTCDate());
+    console.log(countDownTime.getUTCMonth());
+    console.log(countDownTime.getFullYear());
+    console.log(countDownTime.getUTCHours());
+    console.log(countDownTime.getUTCMinutes());
+    console.log(countDownTime.getUTCSeconds());
+    if (!icoEnded) {
+      console.log('setting countdown');
+      $('#countdown_dashboard').countDown({
+          targetDate: {
+              'day': countDownTime.getUTCDate(),
+              'month': countDownTime.getUTCMonth() + 1,
+              'year': countDownTime.getFullYear(),
+              'hour':  countDownTime.getUTCHours(),
+              'min': countDownTime.getUTCMinutes(),
+              'sec': countDownTime.getUTCSeconds(),
+              'new_utc':0,
+          },
+          omitWeeks: true
+      });
+    }
 
     /* ==========================================================================
     Fancy Box
