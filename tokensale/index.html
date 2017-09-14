@@ -96,35 +96,28 @@
               </div>
               <div class="col-xs-10 col-md-10">
                 <div class="progress">
-                  <div id="presale-progress" class="progress-bar progress-bar-info" role="progressbar" style="width:0%">
-                    Presold
+                  <div data-toggle="tooltip" title="Unavailable" id="presale-progress" class="progress-bar progress-bar-info" role="progressbar" style="width:0%">
                   </div>
-                  <div id="raised-progress" class="progress-bar progress-bar-success" role="progressbar" style="width:0%">
-                    KNC sold
+                  <div data-toggle="tooltip" title="Unavailable" id="raised-progress" class="progress-bar progress-bar-success" role="progressbar" style="width:0%">
                   </div>
-                  <div id="left-progress" class="progress-bar progress-bar-warning" role="progressbar" style="width:100%">
-                    KNC left
+                  <div data-toggle="tooltip" title="Unavailable" id="left-progress" class="progress-bar progress-bar-warning" role="progressbar" style="width:100%">
                   </div>
                 </div>
               </div>
               <div class="col-xs-1 col-md-1">
               </div>
             </div>
-            <div class="row eth-info">
-              <div id="raised-eth" class="col-xs-6 text-right eth-number">
-                100 KNC
-              </div>
-              <div class="col-xs-6 text-left eth-label">
-                sold
-              </div>
+            <div class="row eth-info text-center">
+              <p id="raised-eth">
+                Amount of KNC
+                <span class="green"> sold </span>
+              </p>
             </div>
-            <div class="row eth-info">
-              <div id="eth-left" class="col-xs-6 text-right eth-number">
-                100 KNC
-              </div>
-              <div class="col-xs-6 text-left eth-label">
-                left
-              </div>
+            <div class="row eth-info text-center">
+              <p id="eth-left">
+                Amount of KNC
+                <span class="green"> left </span>
+              </p>
             </div>
             <a href="https://tokensale.kyber.network/check/" class="btn  btn-xlarge btn-warning action-button" role="button" style="margin-top:40px;">Registration is over, check your cap here</a>
           </div>

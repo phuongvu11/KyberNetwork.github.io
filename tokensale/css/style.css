@@ -1015,8 +1015,16 @@ header {
   padding-left: 5px;
 }
 
+.green {
+  color: #3ceb7f;
+}
+
 .eth-number {
   padding-right: 5px;
+}
+
+.tooltip {
+  font-size: 18px;
 }
 
 @media only screen  {

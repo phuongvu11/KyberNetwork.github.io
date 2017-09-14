@@ -117,16 +117,18 @@ jQuery(document).ready(function () {
         var raisedPercent = raisedETH.dividedBy(totalETH).times(100);
         var leftPercent = web3.toBigNumber(100).minus(presalePercent).minus(raisedPercent);
         $('#presale-progress').css("width", presalePercent + "%");
-        $('#presale-progress').text(presaleETH.round(3) + " ETH presold");
+        $('#presale-progress').attr("title", presaleETH.round(3) + " ETH presold");
         $('#raised-progress').css("width", raisedPercent + "%");
-        $('#raised-progress').text(raisedETH.round(3) + " ETH raised");
+        $('#raised-progress').attr("title", raisedETH.round(3) + " ETH raised");
         $('#left-progress').css("width", leftPercent + "%");
-        $('#left-progress').text(ethLeft.round(3) + " ETH to go");
-        $('#raised-eth').text(soldKNC.round(3) + " KNC");
-        $('#eth-left').text(kncLeft.round(3) + " KNC");
+        $('#left-progress').attr("title", ethLeft.round(3) + " ETH to go");
+        $('#raised-eth').contents().first()[0].textContent = soldKNC.round(3) + " KNC";
+        $('#eth-left').contents().first()[0].textContent = kncLeft.round(3) + " KNC";
+        $('#presale-progress').tooltip();
+        $('#raised-progress').tooltip();
+        $('#left-progress').tooltip();
       }
     });
-
     /* ==========================================================================
     Fancy Box
     ========================================================================== */
