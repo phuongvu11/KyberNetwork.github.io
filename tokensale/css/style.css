@@ -808,9 +808,6 @@ header {
     .container {
         width: 570px;
     }
-    h1#welcome-msg {
-        width: 470px;
-    }
     .flickr-feed li img {
         width: 81px;
         height: 81px;
