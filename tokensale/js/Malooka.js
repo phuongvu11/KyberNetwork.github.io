@@ -165,9 +165,13 @@ jQuery(document).ready(function () {
     ========================================================================== */
     WindowsHeight = $(window).height();
     HomeSectionContainer = $('#home-section-container').height();
-    CalcMarginTop = (WindowsHeight - HomeSectionContainer) / 2 + 50;
+    CalcMarginTop = (WindowsHeight - HomeSectionContainer) / 2;
 
-    $('#home-section').css({height: WindowsHeight});
+    if (CalcMarginTop < 10) {
+      CalcMarginTop = 10;
+    }
+
+    $('#home-section').css({height: HomeSectionContainer});
     $('#home-section-container').css({top: CalcMarginTop });
 
     /* ==========================================================================
