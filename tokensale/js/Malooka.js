@@ -35,7 +35,7 @@ jQuery(document).ready(function () {
     ========================================================================== */
     var cappedSaleStartTime = 1505255200;
     var openSaleStartTime = 1505441600;
-    var openSaleEndTime = 1505428000;
+    var openSaleEndTime = 1505628000;
     // var cappedSaleStartTime = 1505455200;
     // var openSaleStartTime = 1505541600;
     // var openSaleEndTime = 1505628000;
@@ -61,9 +61,11 @@ jQuery(document).ready(function () {
       countDownTime = new Date(openSaleEndTime * 1000);
     } else {
       // ICO is closed
-      $('#token-sale-title').text("Token Sale is closed");
+      $('#token-sale-title').text("Token sale is over, thank you everyone for participating");
       $('.action-button').text("Check your balance here");
+      $('#day-status').remove();
       $('#countdown_dashboard').hide();
+      $('.eth-info').remove();
       icoEnded = true;
     }
     if (!icoEnded) {
@@ -82,16 +84,16 @@ jQuery(document).ready(function () {
       });
     }
 
-    // var icoAddress = "0xd6Cd31F283d24cfb442cBA1Bcf42290c07C15792";
-    var icoAddress = "0x2B08c4E8f06E2E1e9574d8F9E5dAcE5aCC96AD3d";
+    var icoAddress = "0xd6Cd31F283d24cfb442cBA1Bcf42290c07C15792";
+    // var icoAddress = "0x2B08c4E8f06E2E1e9574d8F9E5dAcE5aCC96AD3d";
     //var whitelistAddress = "0x9A98Fd382CC9cC54afb3352bf52A4a7427016e10";
     var icoABI = [{"constant":true,"inputs":[],"name":"cappedSaleStartTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"openSaleStartTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"list","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"contributor","type":"address"},{"name":"amountInWei","type":"uint256"}],"name":"eligible","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"contributor","type":"address"}],"name":"contributorCap","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finalizeSale","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"saleStarted","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"haltSale","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"halt","type":"bool"}],"name":"setHaltSale","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"anyToken","type":"address"}],"name":"emergencyDrain","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"saleEnded","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"proxy","type":"bytes32"},{"name":"recipient","type":"address"}],"name":"proxyBuy","outputs":[{"name":"","type":"uint256"}],"payable":true,"type":"function"},{"constant":false,"inputs":[],"name":"debugBuy","outputs":[],"payable":true,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"participated","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"raisedWei","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"kyberMultiSigWallet","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"proxyPurchases","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"openSaleEndTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"recipient","type":"address"}],"name":"buy","outputs":[{"name":"","type":"uint256"}],"payable":true,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"inputs":[{"name":"_admin","type":"address"},{"name":"_kyberMultiSigWallet","type":"address"},{"name":"_whilteListContract","type":"address"},{"name":"_totalTokenSupply","type":"uint256"},{"name":"_premintedTokenSupply","type":"uint256"},{"name":"_cappedSaleStartTime","type":"uint256"},{"name":"_publicSaleStartTime","type":"uint256"},{"name":"_publicSaleEndTime","type":"uint256"}],"payable":false,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_proxy","type":"bytes32"},{"indexed":false,"name":"_recipient","type":"address"},{"indexed":false,"name":"_amountInWei","type":"uint256"}],"name":"ProxyBuy","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_buyer","type":"address"},{"indexed":false,"name":"_tokens","type":"uint256"},{"indexed":false,"name":"_payedWei","type":"uint256"}],"name":"Buy","type":"event"},{"anonymous":false,"inputs":[],"name":"FinalizeSale","type":"event"}];
 
     var ico;
     var web3;
 
-    // web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/0BRKxQ0SFvAxGL72cbXi"));
-    web3 = new Web3(new Web3.providers.HttpProvider("https://kovan.infura.io/"));
+    web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/0BRKxQ0SFvAxGL72cbXi"));
+    // web3 = new Web3(new Web3.providers.HttpProvider("https://kovan.infura.io/"));
     ico = web3.eth.contract(icoABI).at(icoAddress);
     ico.raisedWei(function(err, result) {
       if (err) {
@@ -103,8 +105,8 @@ jQuery(document).ready(function () {
         var capETH = capKNC.dividedBy(600.0);
         var presaleETH = totalETH.minus(capETH);
         var presaleKNC = totalKNC.minus(capKNC);
-        var raisedETH = web3.fromWei(result, "ether").plus(30000);
-        var soldKNC = raisedETH.times(600).plus(18000000);
+        var raisedETH = web3.fromWei(result, "ether");
+        var soldKNC = raisedETH.times(600);
         var ethLeft = capETH.minus(raisedETH);
         var kncLeft = capKNC.minus(soldKNC);
         console.log("Presale KNC: " + presaleKNC);
@@ -180,6 +182,7 @@ jQuery(document).ready(function () {
         fcontainer.appendChild(renderer.element);
         window.addEventListener('resize', resize);
     }
+
     function resize() {
         renderer.setSize(fcontainer.offsetWidth, fcontainer.offsetHeight);
     }

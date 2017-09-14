@@ -374,6 +374,11 @@ strong {
     #logo-container {
         text-align: center;
     }
+
+    .action-button {
+      font-size: 18px !important;
+      padding: 16px 16px !important;
+    }
 }
 #logo {
     width: 180px;
@@ -471,6 +476,10 @@ h1#welcome-msg-mobile {
       font-size: 30px;
       letter-spacing: 2px;
       display:none;
+    }
+    .action-button {
+      font-size: 18px !important;
+      padding: 16px 16px !important;
     }
 }
 /* ==========================================================================
@@ -763,6 +772,10 @@ header {
     #timeline .timeline-item .timeline-icon {
         left: 0;
     }
+    .action-button {
+      font-size: 18px !important;
+      padding: 16px 16px !important;
+    }
 }
 /* =========================================
             SECTION CTA
@@ -802,6 +815,10 @@ header {
         width: 81px;
         height: 81px;
     }
+    .action-button {
+      font-size: 18px !important;
+      padding: 16px 16px !important;
+    }
 }
 @media only screen and (min-width: 600px) {
     h1#welcome-msg {
@@ -822,6 +839,10 @@ header {
     .flickr-feed li img {
         width: 61px;
         height: 61px;
+    }
+    .action-button {
+      font-size: 18px !important;
+      padding: 16px 16px !important;
     }
 
 }
@@ -902,7 +923,10 @@ header {
     .mb-20 {
         margin-bottom: 40px!important;
     }
-
+    .action-button {
+      font-size: 18px !important;
+      padding: 16px 16px !important;
+    }
 }
 #table-section {
     margin-top: 25px;
