@@ -171,7 +171,7 @@ jQuery(document).ready(function () {
       CalcMarginTop = 10;
     }
 
-    $('#home-section').css({height: HomeSectionContainer});
+    $('#home-section').css({height: WindowsHeight});
     $('#home-section-container').css({top: CalcMarginTop });
 
     /* ==========================================================================
