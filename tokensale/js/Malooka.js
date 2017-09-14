@@ -31,33 +31,120 @@ jQuery(document).ready(function () {
 
 
     /* ==========================================================================
-    Home Section Height
-    ========================================================================== */
-    WindowsHeight = $(window).height();
-    HomeSectionContainer = $('#home-section-container').height();
-    CalcMarginTop = (WindowsHeight - HomeSectionContainer) / 2;
-
-    $('#home-section').css({height: WindowsHeight});
-    $('#home-section-container').css({top: CalcMarginTop });
-
-
-    /* ==========================================================================
     CountDown Timer
     ========================================================================== */
-    $('#countdown_dashboard').countDown({
-        targetDate: {
-            'day': 15,
-            'month': 9,
-            'year': 2017,
-            'hour':  6,
-            'min': 0,
-            'sec': 0,
-            'new_utc':0,
-        },
-        omitWeeks: true
+    var cappedSaleStartTime = 1505255200;
+    var openSaleStartTime = 1505341600;
+    var openSaleEndTime = 1505428000;
+    // var cappedSaleStartTime = 1505455200;
+    // var openSaleStartTime = 1505541600;
+    // var openSaleEndTime = 1505628000;
+    var currentTime = Math.floor((new Date()).getTime() / 1000.0);
+    console.log(currentTime);
+    var countDownTime;
+    var icoEnded = false;
+    if (currentTime < cappedSaleStartTime) {
+      // before ICO
+      countDownTime = new Date(cappedSaleStartTime * 1000);
+    } else if (currentTime < openSaleStartTime) {
+      // capped sale is openning
+      $('#token-sale-title').text("Token Sale is opened");
+      $('#day-status').text("First day ends in");
+      $('#day-status').show();
+      $('#start-date').remove();
+      $('.action-button').text("Check your cap and balance here");
+      countDownTime = new Date(openSaleStartTime * 1000);
+    } else if (currentTime < openSaleEndTime) {
+      // open sale is openning
+      $('#token-sale-title').text("Token Sale is opened");
+      $('#day-status').text("Second day ends in");
+      $('#day-status').show();
+      $('#start-date').remove();
+      $('.action-button').text("Check your balance here");
+      countDownTime = new Date(openSaleEndTime * 1000);
+    } else {
+      // ICO is closed
+      $('#token-sale-title').text("Token sale is over, thank you everyone for participating");
+      $('.action-button').text("Check your balance here");
+      $('#day-status').remove();
+      $('#start-date').remove();
+      $('#address-container').remove();
+      $('#countdown_dashboard').hide();
+      $('#final-button').show();
+      $('#participate-button').remove();
+      $('#check-balance-button').remove();
+      $('.eth-info').remove();
+      icoEnded = true;
+    }
+    if (!icoEnded) {
+      console.log('setting countdown');
+      $('#countdown_dashboard').countDown({
+          targetDate: {
+              'day': countDownTime.getUTCDate(),
+              'month': countDownTime.getUTCMonth() + 1,
+              'year': countDownTime.getFullYear(),
+              'hour':  countDownTime.getUTCHours(),
+              'min': countDownTime.getUTCMinutes(),
+              'sec': countDownTime.getUTCSeconds(),
+              'new_utc':0,
+          },
+          omitWeeks: true
+      });
+    }
+
+    var icoAddress = "0xd6Cd31F283d24cfb442cBA1Bcf42290c07C15792";
+    // var icoAddress = "0x2B08c4E8f06E2E1e9574d8F9E5dAcE5aCC96AD3d";
+    //var whitelistAddress = "0x9A98Fd382CC9cC54afb3352bf52A4a7427016e10";
+    var icoABI = [{"constant":true,"inputs":[],"name":"cappedSaleStartTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"openSaleStartTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"list","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"contributor","type":"address"},{"name":"amountInWei","type":"uint256"}],"name":"eligible","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"contributor","type":"address"}],"name":"contributorCap","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finalizeSale","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"saleStarted","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"haltSale","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"halt","type":"bool"}],"name":"setHaltSale","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"anyToken","type":"address"}],"name":"emergencyDrain","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"saleEnded","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"proxy","type":"bytes32"},{"name":"recipient","type":"address"}],"name":"proxyBuy","outputs":[{"name":"","type":"uint256"}],"payable":true,"type":"function"},{"constant":false,"inputs":[],"name":"debugBuy","outputs":[],"payable":true,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"participated","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"raisedWei","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"kyberMultiSigWallet","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"proxyPurchases","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"openSaleEndTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"recipient","type":"address"}],"name":"buy","outputs":[{"name":"","type":"uint256"}],"payable":true,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"inputs":[{"name":"_admin","type":"address"},{"name":"_kyberMultiSigWallet","type":"address"},{"name":"_whilteListContract","type":"address"},{"name":"_totalTokenSupply","type":"uint256"},{"name":"_premintedTokenSupply","type":"uint256"},{"name":"_cappedSaleStartTime","type":"uint256"},{"name":"_publicSaleStartTime","type":"uint256"},{"name":"_publicSaleEndTime","type":"uint256"}],"payable":false,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_proxy","type":"bytes32"},{"indexed":false,"name":"_recipient","type":"address"},{"indexed":false,"name":"_amountInWei","type":"uint256"}],"name":"ProxyBuy","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_buyer","type":"address"},{"indexed":false,"name":"_tokens","type":"uint256"},{"indexed":false,"name":"_payedWei","type":"uint256"}],"name":"Buy","type":"event"},{"anonymous":false,"inputs":[],"name":"FinalizeSale","type":"event"}];
+
+    var ico;
+    var web3;
+
+    web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/0BRKxQ0SFvAxGL72cbXi"));
+    // web3 = new Web3(new Web3.providers.HttpProvider("https://kovan.infura.io/"));
+    ico = web3.eth.contract(icoABI).at(icoAddress);
+    ico.raisedWei(function(err, result) {
+      if (err) {
+        console.log("Got error: " + err)
+      } else {
+        var totalETH = web3.toBigNumber(200000);
+        var totalKNC = web3.toBigNumber(226000000);
+        var capKNC = web3.toBigNumber(57568415);
+        var capETH = capKNC.dividedBy(600.0);
+        var presaleETH = totalETH.minus(capETH);
+        var presaleKNC = totalKNC.minus(capKNC);
+        var publicETH = web3.fromWei(result, "ether");
+        var publicKNC = publicETH.times(600);
+        var raisedETH = presaleETH.plus(publicETH);
+        var soldKNC = presaleKNC.plus(publicKNC);
+        var ethLeft = totalETH.minus(raisedETH);
+        var kncLeft = totalKNC.minus(soldKNC);
+        console.log("Presale KNC: " + presaleKNC);
+        console.log("Presale ETH: " + presaleETH);
+        console.log("Raised: " + raisedETH + " ETH");
+        console.log("Sold: " + soldKNC + " KNC");
+        console.log("ETH left: " + ethLeft);
+        console.log("KNC left: " + kncLeft);
+        var raisedPercent = raisedETH.dividedBy(totalETH).times(100);
+        var leftPercent = web3.toBigNumber(100).minus(raisedPercent);
+        $('#raised-progress').css("width", raisedPercent + "%");
+        if (raisedPercent.greaterThan(30)) {
+          $('#raised-progress').text(raisedETH.round(2) + " ETH raised");
+        } else {
+          $('#raised-progress').attr("title", raisedETH.round(2) + " ETH raised");
+          $('#raised-progress').tooltip();
+        }
+        $('#left-progress').css("width", leftPercent + "%");
+        if (leftPercent.greaterThan(30)) {
+          $('#left-progress').text(ethLeft.round(2) + " ETH left");
+        } else {
+          $('#left-progress').attr("title", ethLeft.round(2) + " ETH left");
+          $('#left-progress').tooltip();
+        }
+        $('#raised-eth').contents().first()[0].textContent = soldKNC.round(2) + " KNC";
+        $('#eth-left').contents().first()[0].textContent = kncLeft.round(2) + " KNC";
+      }
     });
-
-
     /* ==========================================================================
     Fancy Box
     ========================================================================== */
@@ -72,6 +159,16 @@ jQuery(document).ready(function () {
             }
         }
     });
+
+    /* ==========================================================================
+    Home Section Height
+    ========================================================================== */
+    WindowsHeight = $(window).height();
+    HomeSectionContainer = $('#home-section-container').height();
+    CalcMarginTop = (WindowsHeight - HomeSectionContainer) / 2 + 50;
+
+    $('#home-section').css({height: WindowsHeight});
+    $('#home-section-container').css({top: CalcMarginTop });
 
     /* ==========================================================================
     Flat Surface Shader
@@ -92,9 +189,11 @@ jQuery(document).ready(function () {
         fcontainer.appendChild(renderer.element);
         window.addEventListener('resize', resize);
     }
+
     function resize() {
         renderer.setSize(fcontainer.offsetWidth, fcontainer.offsetHeight);
     }
+
     function animate() {
         now = Date.now() - start;
         light.setPosition(300 * Math.sin(now * 0.001), 150 * Math.cos(now * 0.0005), 150);
@@ -106,37 +205,7 @@ jQuery(document).ready(function () {
     resize();
     animate();
 
-
 }); // JavaScript Document
-
-
-
-
-/* ==========================================================================
-Window Resize
-========================================================================== */
-$(window).resize(function () {
-
-    'use strict';
-
-    var WindowsHeight, HomeSectionContainer, CalcMarginTop;
-
-    /* ==========================================================================
-    Home Section Height
-    ========================================================================== */
-    WindowsHeight = $(window).height();
-    HomeSectionContainer = $('#home-section-container').height();
-    CalcMarginTop = (WindowsHeight - HomeSectionContainer) / 2;
-
-    $('#home-section').css({height: WindowsHeight});
-    $('#home-section-container').css({top: CalcMarginTop });
-    $('#home-section canvas').css({height: '100% !important'});
-    $('#home-section canvas').css({width: '100% !important'});
-
-});
-
-
-
 
 /* ==========================================================================
 Window Load
