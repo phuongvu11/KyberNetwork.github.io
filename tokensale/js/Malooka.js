@@ -47,6 +47,7 @@ jQuery(document).ready(function () {
       // before ICO
       $('.eth-info').hide();
       countDownTime = new Date(cappedSaleStartTime * 1000);
+      $('#button-container').css('margin-top', 50);
     } else if (currentTime < openSaleStartTime) {
       // capped sale is openning
       $('#token-sale-title').text("Token Sale is opened");
@@ -114,14 +115,16 @@ jQuery(document).ready(function () {
         var capETH = capKNC.dividedBy(600.0);
         var presaleETH = totalETH.minus(capETH);
         var presaleKNC = totalKNC.minus(capKNC);
-        var publicETH = web3.fromWei(result, "ether").plus(90000);
-        var publicKNC = publicETH.times(600).plus(90000 * 600);
+        var publicETH = web3.fromWei(result, "ether");
+        var publicKNC = publicETH.times(600);
         var raisedETH = presaleETH.plus(publicETH);
         var soldKNC = presaleKNC.plus(publicKNC);
         var ethLeft = totalETH.minus(raisedETH);
         var kncLeft = capKNC.minus(publicKNC);
         console.log("Presale KNC: " + presaleKNC);
         console.log("Presale ETH: " + presaleETH);
+        console.log("Public: " + publicETH + " ETH");
+        console.log("Public: " + publicKNC + " KNC");
         console.log("Raised: " + raisedETH + " ETH");
         console.log("Sold: " + soldKNC + " KNC");
         console.log("ETH left: " + ethLeft);
