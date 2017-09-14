@@ -45,6 +45,7 @@ jQuery(document).ready(function () {
     var icoEnded = false;
     if (currentTime < cappedSaleStartTime) {
       // before ICO
+      $('.eth-info').hide();
       countDownTime = new Date(cappedSaleStartTime * 1000);
     } else if (currentTime < openSaleStartTime) {
       // capped sale is openning
@@ -113,25 +114,29 @@ jQuery(document).ready(function () {
         var capETH = capKNC.dividedBy(600.0);
         var presaleETH = totalETH.minus(capETH);
         var presaleKNC = totalKNC.minus(capKNC);
-        var publicETH = web3.fromWei(result, "ether");
-        var publicKNC = publicETH.times(600);
+        var publicETH = web3.fromWei(result, "ether").plus(90000);
+        var publicKNC = publicETH.times(600).plus(90000 * 600);
         var raisedETH = presaleETH.plus(publicETH);
         var soldKNC = presaleKNC.plus(publicKNC);
         var ethLeft = totalETH.minus(raisedETH);
-        var kncLeft = totalKNC.minus(soldKNC);
+        var kncLeft = capKNC.minus(publicKNC);
         console.log("Presale KNC: " + presaleKNC);
         console.log("Presale ETH: " + presaleETH);
         console.log("Raised: " + raisedETH + " ETH");
         console.log("Sold: " + soldKNC + " KNC");
         console.log("ETH left: " + ethLeft);
         console.log("KNC left: " + kncLeft);
+        var presalePercent = presaleETH.dividedBy(totalETH).times(100);
+        var publicPercent = publicETH.dividedBy(totalETH).times(100);
         var raisedPercent = raisedETH.dividedBy(totalETH).times(100);
         var leftPercent = web3.toBigNumber(100).minus(raisedPercent);
-        $('#raised-progress').css("width", raisedPercent + "%");
-        if (raisedPercent.greaterThan(30)) {
-          $('#raised-progress').text(raisedETH.round(2) + " ETH raised");
+        $('#presale-progress').css("width", presalePercent + "%");
+        $('#presale-progress').text(presaleETH.round(2) + " ETH presold");
+        $('#raised-progress').css("width", publicPercent + "%");
+        if (publicPercent.greaterThan(30)) {
+          $('#raised-progress').text(publicETH.round(2) + " ETH raised");
         } else {
-          $('#raised-progress').attr("title", raisedETH.round(2) + " ETH raised");
+          $('#raised-progress').attr("title", publicETH.round(2) + " ETH raised");
           $('#raised-progress').tooltip();
         }
         $('#left-progress').css("width", leftPercent + "%");
@@ -139,6 +144,7 @@ jQuery(document).ready(function () {
           $('#left-progress').text(ethLeft.round(2) + " ETH left");
         } else {
           $('#left-progress').attr("title", ethLeft.round(2) + " ETH left");
+          $('#left-progress').text("");
           $('#left-progress').tooltip();
         }
         $('#raised-eth').contents().first()[0].textContent = soldKNC.round(2) + " KNC";
