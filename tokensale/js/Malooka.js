@@ -33,12 +33,12 @@ jQuery(document).ready(function () {
     /* ==========================================================================
     CountDown Timer
     ========================================================================== */
-    // var cappedSaleStartTime = 1505255200;
-    // var openSaleStartTime = 1505441600;
+    var cappedSaleStartTime = 1505255200;
+    var openSaleStartTime = 1505341600;
+    var openSaleEndTime = 1505428000;
+    // var cappedSaleStartTime = 1505455200;
+    // var openSaleStartTime = 1505541600;
     // var openSaleEndTime = 1505628000;
-    var cappedSaleStartTime = 1505455200;
-    var openSaleStartTime = 1505541600;
-    var openSaleEndTime = 1505628000;
     var currentTime = Math.floor((new Date()).getTime() / 1000.0);
     console.log(currentTime);
     var countDownTime;
@@ -48,14 +48,18 @@ jQuery(document).ready(function () {
       countDownTime = new Date(cappedSaleStartTime * 1000);
     } else if (currentTime < openSaleStartTime) {
       // capped sale is openning
-      $('#token-sale-title').text("Token Sale is opened at");
+      $('#token-sale-title').text("Token Sale is opened");
       $('#day-status').text("First day ends in");
+      $('#day-status').show();
+      $('#start-date').remove();
       $('.action-button').text("Check your cap and balance here");
       countDownTime = new Date(openSaleStartTime * 1000);
     } else if (currentTime < openSaleEndTime) {
       // open sale is openning
-      $('#token-sale-title').text("Token Sale is opened at");
+      $('#token-sale-title').text("Token Sale is opened");
       $('#day-status').text("Second day ends in");
+      $('#day-status').show();
+      $('#start-date').remove();
       $('.action-button').text("Check your balance here");
       countDownTime = new Date(openSaleEndTime * 1000);
     } else {
@@ -63,7 +67,12 @@ jQuery(document).ready(function () {
       $('#token-sale-title').text("Token sale is over, thank you everyone for participating");
       $('.action-button').text("Check your balance here");
       $('#day-status').remove();
+      $('#start-date').remove();
+      $('#address-container').remove();
       $('#countdown_dashboard').hide();
+      $('#final-button').show();
+      $('#participate-button').remove();
+      $('#check-balance-button').remove();
       $('.eth-info').remove();
       icoEnded = true;
     }
