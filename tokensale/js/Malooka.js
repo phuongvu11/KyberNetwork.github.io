@@ -117,12 +117,13 @@ jQuery(document).ready(function () {
         var raisedPercent = raisedETH.dividedBy(totalETH).times(100);
         var leftPercent = web3.toBigNumber(100).minus(presalePercent).minus(raisedPercent);
         $('#presale-progress').css("width", presalePercent + "%");
+        $('#presale-progress').text(presaleETH.round(3) + " ETH presold");
         $('#raised-progress').css("width", raisedPercent + "%");
-        $('#raised-progress').text("Raised " + soldKNC.round(3) + " KNC");
+        $('#raised-progress').text(raisedETH.round(3) + " ETH raised");
         $('#left-progress').css("width", leftPercent + "%");
-        $('#left-progress').text(kncLeft.round(3) + " KNC left");
-        $('#raised-eth').text(raisedETH.round(3) + " ETH");
-        $('#eth-left').text(ethLeft.round(3) + " ETH");
+        $('#left-progress').text(ethLeft.round(3) + " ETH to go");
+        $('#raised-eth').text(soldKNC.round(3) + " KNC");
+        $('#eth-left').text(kncLeft.round(3) + " KNC");
       }
     });
 
