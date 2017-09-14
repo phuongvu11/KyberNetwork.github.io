@@ -33,12 +33,12 @@ jQuery(document).ready(function () {
     /* ==========================================================================
     CountDown Timer
     ========================================================================== */
-    var cappedSaleStartTime = 1505255200;
-    var openSaleStartTime = 1505441600;
+    //var cappedSaleStartTime = 1505255200;
+    //var openSaleStartTime = 1505441600;
+    //var openSaleEndTime = 1505628000;
+    var cappedSaleStartTime = 1505455200;
+    var openSaleStartTime = 1505541600;
     var openSaleEndTime = 1505628000;
-    // var cappedSaleStartTime = 1505455200;
-    // var openSaleStartTime = 1505541600;
-    // var openSaleEndTime = 1505628000;
     var currentTime = Math.floor((new Date()).getTime() / 1000.0);
     console.log(currentTime);
     var countDownTime;
