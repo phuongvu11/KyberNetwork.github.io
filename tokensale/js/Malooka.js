@@ -119,14 +119,14 @@ jQuery(document).ready(function () {
         $('#presale-progress').css("width", presalePercent + "%");
         $('#presale-progress').text(presaleETH.round(2) + " ETH presold");
         $('#raised-progress').css("width", raisedPercent + "%");
-        if (raisedPercent.greaterThan(20)) {
+        if (raisedPercent.greaterThan(30)) {
           $('#raised-progress').text(raisedETH.round(2) + " ETH raised");
         } else {
           $('#raised-progress').attr("title", raisedETH.round(2) + " ETH raised");
           $('#raised-progress').tooltip();
         }
         $('#left-progress').css("width", leftPercent + "%");
-        if (leftPercent.greaterThan(20)) {
+        if (leftPercent.greaterThan(30)) {
           $('#left-progress').text(ethLeft.round(2) + " ETH left");
         } else {
           $('#left-progress').attr("title", ethLeft.round(2) + " ETH left");

@@ -842,9 +842,6 @@ header {
     .hours_dash {
         margin-bottom: 0;
     }
-    .hours_dash:after {
-        display: none;
-    }
     .dash_title {
         margin-top: 0;
     }
