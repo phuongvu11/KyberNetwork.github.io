@@ -117,23 +117,23 @@ jQuery(document).ready(function () {
         var raisedPercent = raisedETH.dividedBy(totalETH).times(100);
         var leftPercent = web3.toBigNumber(100).minus(presalePercent).minus(raisedPercent);
         $('#presale-progress').css("width", presalePercent + "%");
-        $('#presale-progress').text(presaleETH.round(3) + " ETH presold");
+        $('#presale-progress').text(presaleETH.round(2) + " ETH presold");
         $('#raised-progress').css("width", raisedPercent + "%");
         if (raisedPercent.greaterThan(20)) {
-          $('#raised-progress').text(raisedETH.round(3) + " ETH raised");
+          $('#raised-progress').text(raisedETH.round(2) + " ETH raised");
         } else {
-          $('#raised-progress').attr("title", raisedETH.round(3) + " ETH raised");
+          $('#raised-progress').attr("title", raisedETH.round(2) + " ETH raised");
           $('#raised-progress').tooltip();
         }
         $('#left-progress').css("width", leftPercent + "%");
         if (leftPercent.greaterThan(20)) {
-          $('#left-progress').text(ethLeft.round(3) + " ETH to go");
+          $('#left-progress').text(ethLeft.round(2) + " ETH left");
         } else {
-          $('#left-progress').attr("title", ethLeft.round(3) + " ETH to go");
+          $('#left-progress').attr("title", ethLeft.round(2) + " ETH left");
           $('#left-progress').tooltip();
         }
-        $('#raised-eth').contents().first()[0].textContent = soldKNC.round(3) + " KNC";
-        $('#eth-left').contents().first()[0].textContent = kncLeft.round(3) + " KNC";
+        $('#raised-eth').contents().first()[0].textContent = soldKNC.round(2) + " KNC";
+        $('#eth-left').contents().first()[0].textContent = kncLeft.round(2) + " KNC";
       }
     });
     /* ==========================================================================
