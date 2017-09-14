@@ -31,31 +31,21 @@ jQuery(document).ready(function () {
 
 
     /* ==========================================================================
-    Home Section Height
-    ========================================================================== */
-    WindowsHeight = $(window).height();
-    HomeSectionContainer = $('#home-section-container').height();
-    CalcMarginTop = (WindowsHeight - HomeSectionContainer) / 2;
-
-    $('#home-section').css({height: WindowsHeight});
-    $('#home-section-container').css({top: CalcMarginTop });
-
-
-    /* ==========================================================================
     CountDown Timer
     ========================================================================== */
-    // var cappedSaleStartTime = 1505055200;
-    // var openSaleStartTime = 1505141600;
-    // var openSaleEndTime = 1505428000;
-    var cappedSaleStartTime = 1505455200;
-    var openSaleStartTime = 1505541600;
-    var openSaleEndTime = 1505628000;
+    var cappedSaleStartTime = 1505255200;
+    var openSaleStartTime = 1505441600;
+    var openSaleEndTime = 1505428000;
+    // var cappedSaleStartTime = 1505455200;
+    // var openSaleStartTime = 1505541600;
+    // var openSaleEndTime = 1505628000;
     var currentTime = Math.floor((new Date()).getTime() / 1000.0);
     console.log(currentTime);
     var countDownTime;
     var icoEnded = false;
     if (currentTime < cappedSaleStartTime) {
       // before ICO
+      $('.eth-info').hide();
       countDownTime = new Date(cappedSaleStartTime * 1000);
     } else if (currentTime < openSaleStartTime) {
       // capped sale is openning
@@ -92,16 +82,16 @@ jQuery(document).ready(function () {
       });
     }
 
-    var icoAddress = "0xd6Cd31F283d24cfb442cBA1Bcf42290c07C15792";
-    // var icoAddress = "0x2B08c4E8f06E2E1e9574d8F9E5dAcE5aCC96AD3d";
+    // var icoAddress = "0xd6Cd31F283d24cfb442cBA1Bcf42290c07C15792";
+    var icoAddress = "0x2B08c4E8f06E2E1e9574d8F9E5dAcE5aCC96AD3d";
     //var whitelistAddress = "0x9A98Fd382CC9cC54afb3352bf52A4a7427016e10";
     var icoABI = [{"constant":true,"inputs":[],"name":"cappedSaleStartTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"openSaleStartTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"list","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"contributor","type":"address"},{"name":"amountInWei","type":"uint256"}],"name":"eligible","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"contributor","type":"address"}],"name":"contributorCap","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[],"name":"finalizeSale","outputs":[],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"saleStarted","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"haltSale","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"halt","type":"bool"}],"name":"setHaltSale","outputs":[],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"anyToken","type":"address"}],"name":"emergencyDrain","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"saleEnded","outputs":[{"name":"","type":"bool"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"proxy","type":"bytes32"},{"name":"recipient","type":"address"}],"name":"proxyBuy","outputs":[{"name":"","type":"uint256"}],"payable":true,"type":"function"},{"constant":false,"inputs":[],"name":"debugBuy","outputs":[],"payable":true,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"participated","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"raisedWei","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"kyberMultiSigWallet","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[{"name":"","type":"bytes32"}],"name":"proxyPurchases","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"openSaleEndTime","outputs":[{"name":"","type":"uint256"}],"payable":false,"type":"function"},{"constant":false,"inputs":[{"name":"recipient","type":"address"}],"name":"buy","outputs":[{"name":"","type":"uint256"}],"payable":true,"type":"function"},{"constant":true,"inputs":[],"name":"admin","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"constant":true,"inputs":[],"name":"token","outputs":[{"name":"","type":"address"}],"payable":false,"type":"function"},{"inputs":[{"name":"_admin","type":"address"},{"name":"_kyberMultiSigWallet","type":"address"},{"name":"_whilteListContract","type":"address"},{"name":"_totalTokenSupply","type":"uint256"},{"name":"_premintedTokenSupply","type":"uint256"},{"name":"_cappedSaleStartTime","type":"uint256"},{"name":"_publicSaleStartTime","type":"uint256"},{"name":"_publicSaleEndTime","type":"uint256"}],"payable":false,"type":"constructor"},{"payable":true,"type":"fallback"},{"anonymous":false,"inputs":[{"indexed":true,"name":"_proxy","type":"bytes32"},{"indexed":false,"name":"_recipient","type":"address"},{"indexed":false,"name":"_amountInWei","type":"uint256"}],"name":"ProxyBuy","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_buyer","type":"address"},{"indexed":false,"name":"_tokens","type":"uint256"},{"indexed":false,"name":"_payedWei","type":"uint256"}],"name":"Buy","type":"event"},{"anonymous":false,"inputs":[],"name":"FinalizeSale","type":"event"}];
 
     var ico;
     var web3;
 
-    web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/0BRKxQ0SFvAxGL72cbXi"));
-    // web3 = new Web3(new Web3.providers.HttpProvider("https://kovan.infura.io/"));
+    // web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/0BRKxQ0SFvAxGL72cbXi"));
+    web3 = new Web3(new Web3.providers.HttpProvider("https://kovan.infura.io/"));
     ico = web3.eth.contract(icoABI).at(icoAddress);
     ico.raisedWei(function(err, result) {
       if (err) {
@@ -113,8 +103,8 @@ jQuery(document).ready(function () {
         var capETH = capKNC.dividedBy(600.0);
         var presaleETH = totalETH.minus(capETH);
         var presaleKNC = totalKNC.minus(capKNC);
-        var raisedETH = web3.fromWei(result, "ether");
-        var soldKNC = raisedETH.times(600);
+        var raisedETH = web3.fromWei(result, "ether").plus(30000);
+        var soldKNC = raisedETH.times(600).plus(18000000);
         var ethLeft = capETH.minus(raisedETH);
         var kncLeft = capKNC.minus(soldKNC);
         console.log("Presale KNC: " + presaleKNC);
@@ -128,9 +118,9 @@ jQuery(document).ready(function () {
         var leftPercent = web3.toBigNumber(100).minus(presalePercent).minus(raisedPercent);
         $('#presale-progress').css("width", presalePercent + "%");
         $('#raised-progress').css("width", raisedPercent + "%");
-        $('#raised-progress').text("Raised " + soldKNC + " KNC");
+        $('#raised-progress').text("Raised " + soldKNC.round(3) + " KNC");
         $('#left-progress').css("width", leftPercent + "%");
-        $('#left-progress').text(kncLeft + " KNC left");
+        $('#left-progress').text(kncLeft.round(3) + " KNC left");
         $('#raised-eth').text(raisedETH.round(3) + " ETH");
         $('#eth-left').text(ethLeft.round(3) + " ETH");
       }
@@ -150,6 +140,16 @@ jQuery(document).ready(function () {
             }
         }
     });
+
+    /* ==========================================================================
+    Home Section Height
+    ========================================================================== */
+    WindowsHeight = $(window).height();
+    HomeSectionContainer = $('#home-section-container').height();
+    CalcMarginTop = (WindowsHeight - HomeSectionContainer) / 2 + 50;
+
+    $('#home-section').css({height: WindowsHeight});
+    $('#home-section-container').css({top: CalcMarginTop });
 
     /* ==========================================================================
     Flat Surface Shader
@@ -173,6 +173,7 @@ jQuery(document).ready(function () {
     function resize() {
         renderer.setSize(fcontainer.offsetWidth, fcontainer.offsetHeight);
     }
+
     function animate() {
         now = Date.now() - start;
         light.setPosition(300 * Math.sin(now * 0.001), 150 * Math.cos(now * 0.0005), 150);
@@ -184,37 +185,7 @@ jQuery(document).ready(function () {
     resize();
     animate();
 
-
 }); // JavaScript Document
-
-
-
-
-/* ==========================================================================
-Window Resize
-========================================================================== */
-$(window).resize(function () {
-
-    'use strict';
-
-    var WindowsHeight, HomeSectionContainer, CalcMarginTop;
-
-    /* ==========================================================================
-    Home Section Height
-    ========================================================================== */
-    WindowsHeight = $(window).height();
-    HomeSectionContainer = $('#home-section-container').height();
-    CalcMarginTop = 50;
-
-    $('#home-section').css({height: WindowsHeight});
-    $('#home-section-container').css({top: CalcMarginTop });
-    $('#home-section canvas').css({height: '100% !important'});
-    $('#home-section canvas').css({width: '100% !important'});
-
-});
-
-
-
 
 /* ==========================================================================
 Window Load
