@@ -117,16 +117,23 @@ jQuery(document).ready(function () {
         var raisedPercent = raisedETH.dividedBy(totalETH).times(100);
         var leftPercent = web3.toBigNumber(100).minus(presalePercent).minus(raisedPercent);
         $('#presale-progress').css("width", presalePercent + "%");
-        $('#presale-progress').attr("title", presaleETH.round(3) + " ETH presold");
+        $('#presale-progress').text(presaleETH.round(3) + " ETH presold");
         $('#raised-progress').css("width", raisedPercent + "%");
-        $('#raised-progress').attr("title", raisedETH.round(3) + " ETH raised");
+        if (raisedPercent.greaterThan(20)) {
+          $('#raised-progress').text(raisedETH.round(3) + " ETH raised");
+        } else {
+          $('#raised-progress').attr("title", raisedETH.round(3) + " ETH raised");
+          $('#raised-progress').tooltip();
+        }
         $('#left-progress').css("width", leftPercent + "%");
-        $('#left-progress').attr("title", ethLeft.round(3) + " ETH to go");
+        if (leftPercent.greaterThan(20)) {
+          $('#left-progress').text(ethLeft.round(3) + " ETH to go");
+        } else {
+          $('#left-progress').attr("title", ethLeft.round(3) + " ETH to go");
+          $('#left-progress').tooltip();
+        }
         $('#raised-eth').contents().first()[0].textContent = soldKNC.round(3) + " KNC";
         $('#eth-left').contents().first()[0].textContent = kncLeft.round(3) + " KNC";
-        $('#presale-progress').tooltip();
-        $('#raised-progress').tooltip();
-        $('#left-progress').tooltip();
       }
     });
     /* ==========================================================================
@@ -186,7 +193,7 @@ jQuery(document).ready(function () {
 
     initialise();
     resize();
-    animate();
+    // animate();
 
 }); // JavaScript Document
 
