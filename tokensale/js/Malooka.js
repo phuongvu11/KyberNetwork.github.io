@@ -33,9 +33,9 @@ jQuery(document).ready(function () {
     /* ==========================================================================
     CountDown Timer
     ========================================================================== */
-    //var cappedSaleStartTime = 1505255200;
-    //var openSaleStartTime = 1505441600;
-    //var openSaleEndTime = 1505628000;
+    // var cappedSaleStartTime = 1505255200;
+    // var openSaleStartTime = 1505441600;
+    // var openSaleEndTime = 1505628000;
     var cappedSaleStartTime = 1505455200;
     var openSaleStartTime = 1505541600;
     var openSaleEndTime = 1505628000;
@@ -45,17 +45,16 @@ jQuery(document).ready(function () {
     var icoEnded = false;
     if (currentTime < cappedSaleStartTime) {
       // before ICO
-      $('.eth-info').hide();
       countDownTime = new Date(cappedSaleStartTime * 1000);
     } else if (currentTime < openSaleStartTime) {
       // capped sale is openning
-      $('#token-sale-title').text("Token Sale is opened");
+      $('#token-sale-title').text("Token Sale is opened at");
       $('#day-status').text("First day ends in");
       $('.action-button').text("Check your cap and balance here");
       countDownTime = new Date(openSaleStartTime * 1000);
     } else if (currentTime < openSaleEndTime) {
       // open sale is openning
-      $('#token-sale-title').text("Token Sale is opened");
+      $('#token-sale-title').text("Token Sale is opened at");
       $('#day-status').text("Second day ends in");
       $('.action-button').text("Check your balance here");
       countDownTime = new Date(openSaleEndTime * 1000);
@@ -105,21 +104,20 @@ jQuery(document).ready(function () {
         var capETH = capKNC.dividedBy(600.0);
         var presaleETH = totalETH.minus(capETH);
         var presaleKNC = totalKNC.minus(capKNC);
-        var raisedETH = web3.fromWei(result, "ether");
-        var soldKNC = raisedETH.times(600);
-        var ethLeft = capETH.minus(raisedETH);
-        var kncLeft = capKNC.minus(soldKNC);
+        var publicETH = web3.fromWei(result, "ether");
+        var publicKNC = publicETH.times(600);
+        var raisedETH = presaleETH.plus(publicETH);
+        var soldKNC = presaleKNC.plus(publicKNC);
+        var ethLeft = totalETH.minus(raisedETH);
+        var kncLeft = totalKNC.minus(soldKNC);
         console.log("Presale KNC: " + presaleKNC);
         console.log("Presale ETH: " + presaleETH);
         console.log("Raised: " + raisedETH + " ETH");
         console.log("Sold: " + soldKNC + " KNC");
         console.log("ETH left: " + ethLeft);
         console.log("KNC left: " + kncLeft);
-        var presalePercent = presaleETH.dividedBy(totalETH).times(100);
         var raisedPercent = raisedETH.dividedBy(totalETH).times(100);
-        var leftPercent = web3.toBigNumber(100).minus(presalePercent).minus(raisedPercent);
-        $('#presale-progress').css("width", presalePercent + "%");
-        $('#presale-progress').text(presaleETH.round(2) + " ETH presold");
+        var leftPercent = web3.toBigNumber(100).minus(raisedPercent);
         $('#raised-progress').css("width", raisedPercent + "%");
         if (raisedPercent.greaterThan(30)) {
           $('#raised-progress').text(raisedETH.round(2) + " ETH raised");
