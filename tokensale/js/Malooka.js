@@ -216,7 +216,7 @@ jQuery(document).ready(function () {
 
     initialise();
     resize();
-    animate();
+    // animate();
 
 }); // JavaScript Document
 
