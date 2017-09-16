@@ -43,28 +43,28 @@ jQuery(document).ready(function () {
     console.log(currentTime);
     var countDownTime;
     var icoEnded = false;
-    if (currentTime < cappedSaleStartTime) {
-      // before ICO
-      $('.eth-info').hide();
-      countDownTime = new Date(cappedSaleStartTime * 1000);
-      $('#button-container').css('margin-top', 50);
-    } else if (currentTime < openSaleStartTime) {
-      // capped sale is openning
-      $('#token-sale-title').text("Token Sale is opened");
-      $('#day-status').text("First day ends in");
-      $('#day-status').show();
-      $('#start-date').remove();
-      $('.action-button').text("Check your cap and balance here");
-      countDownTime = new Date(openSaleStartTime * 1000);
-    } else if (currentTime < openSaleEndTime) {
-      // open sale is openning
-      $('#token-sale-title').text("Token Sale is opened");
-      $('#day-status').text("Second day ends in");
-      $('#day-status').show();
-      $('#start-date').remove();
-      $('.action-button').text("Check your balance here");
-      countDownTime = new Date(openSaleEndTime * 1000);
-    } else {
+    // if (currentTime < cappedSaleStartTime) {
+    //   // before ICO
+    //   $('.eth-info').hide();
+    //   countDownTime = new Date(cappedSaleStartTime * 1000);
+    //   $('#button-container').css('margin-top', 50);
+    // } else if (currentTime < openSaleStartTime) {
+    //   // capped sale is openning
+    //   $('#token-sale-title').text("Token Sale is opened");
+    //   $('#day-status').text("First day ends in");
+    //   $('#day-status').show();
+    //   $('#start-date').remove();
+    //   $('.action-button').text("Check your cap and balance here");
+    //   countDownTime = new Date(openSaleStartTime * 1000);
+    // } else if (currentTime < openSaleEndTime) {
+    //   // open sale is openning
+    //   $('#token-sale-title').text("Token Sale is opened");
+    //   $('#day-status').text("Second day ends in");
+    //   $('#day-status').show();
+    //   $('#start-date').remove();
+    //   $('.action-button').text("Check your balance here");
+    //   countDownTime = new Date(openSaleEndTime * 1000);
+    // } else {
       // ICO is closed
       $('#token-sale-title').text("Token sale is over, thank you everyone for participating");
       $('.action-button').text("Check your balance here");
@@ -77,7 +77,7 @@ jQuery(document).ready(function () {
       $('#check-balance-button').remove();
       $('.eth-info').remove();
       icoEnded = true;
-    }
+    // }
     if (!icoEnded) {
       console.log('setting countdown');
       $('#countdown_dashboard').countDown({
@@ -154,6 +154,10 @@ jQuery(document).ready(function () {
         $('#eth-left').contents().first()[0].textContent = kncLeft.round(2) + " KNC";
       }
     });
+
+    ico.haltSale(function(error, result) {
+      console.log("Sale halted: " + result);
+    });
     /* ==========================================================================
     Fancy Box
     ========================================================================== */
@@ -216,7 +220,7 @@ jQuery(document).ready(function () {
 
     initialise();
     resize();
-    // animate();
+    animate();
 
 }); // JavaScript Document
 

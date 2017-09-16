@@ -400,11 +400,13 @@ strong {
     z-index: 1;
     width: 100%;
     position: relative;
+    /*
     background: url(bg.png) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    */
 }
 #home-section-wrapper {
     width: 100%;
