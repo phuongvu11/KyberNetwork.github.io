@@ -193,11 +193,12 @@ background-size: cover; }
 
 #contact {
   background: url(img/chambi.png) center center no-repeat;
+	margin-top: 20px;
   padding: 55px 0;
 }
 
-#contact h5 { margin-bottom: 30px; }
-#contact .circle { color:#fff;width:50px;height:50px;border-radius: 50%;background:#188c92;display: inline-block;text-align: center;line-height: 50px;margin-right:10px; }
+#contact h5 { margin-bottom: 10px; }
+#contact .circle { color:#fff;width:50px;height:50px;border-radius: 50%;background:#188c92;display: inline-block;text-align: center;line-height:50px;margin-right:10px; }
 #contact .circle:hover { color:#188c92;background: #fff;transition: all ease-in-out .5s; }
 #contact span { color: #b7b7b7; }
 #contact input[type="text"] { border: 0; background: #e6e4e4;padding:10px 0 10px 15px;width: 90%; }
@@ -352,4 +353,35 @@ background-size: cover; }
 	#about p { font-size: 12px; }
 	.properties .prop-item { padding: 30px 20px;height: 270px; }
 	.prop-item h5 { font-size: 14px; }
+}
+
+.flex-container {
+	display: flex;
+}
+
+#contact .circle-flex
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	margin: 1rem 0.5rem;
+	color:#fff;
+	width: 50px;
+	height:50px;
+	border-radius: 50%;
+	background:#188c92;
+	font-size: 1rem;
+
+}
+
+#contact .circle-flex:hover { color:#188c92;background: #fff;transition: all ease-in-out .5s; }
+
+@media screen and (max-width:940px) {
+	#contact .circle-flex {
+	width: 40px;
+  height:40px;
+	font-size: 0.75rem;
+	margin: 15px 5px;
+}
 }
