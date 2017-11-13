@@ -125,6 +125,25 @@ background-size: cover; }
 .app-item-img.img3 { background: url(img/a3.png) center center no-repeat;background-size: contain;width: 70px; }
 .app-item-img.img4 { background: url(img/a4.png) center center no-repeat;background-size: contain;width: 130px; }
 
+#news .news-sources {
+	text-align: center;
+	margin: 0 auto;
+}
+
+#news .news-sources a {
+	display: inline-block;
+	padding: 30px;
+}
+
+#news .news-sources a:hover img {
+	filter: grayscale(0);
+}
+
+#news .news-sources	img {
+	width: 150px;
+	filter: grayscale(1);
+}
+
 #news .card img {
   height: 213px;
   object-fit: cover;
